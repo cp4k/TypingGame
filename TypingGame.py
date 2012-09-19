@@ -1,6 +1,10 @@
 import pygame, random
 pygame.init()
-
+def striplist(l):
+    return([x.strip() for x in l])
+def openit(name):
+    f = open()
+    return striplist(f.readlines())
 width,height = (640,480)
 screen = pygame.display.set_mode((width,height))
 
