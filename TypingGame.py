@@ -10,7 +10,7 @@ screen = pygame.display.set_mode((width,height))
 def get_words(text):
     for i in text:
         if len(i.split()) > 5:
-        words.extend(i.split())
+            words.extend(i.split())
 def clean_text(remove = [',','.','@','%','#','$','*','(',')','^']):
     I = 0
     for i in lines:
@@ -46,9 +46,22 @@ while running:
                 running = False
             else:
                 if word.checkLetter(event.unicode): #event.unicode is the letter the user typed
-                    word = TypingGameWord("Another test!")
+                    try:
+                        wordStr = random.choice(words)
+                        word = TypingGameWord(wordStr)
+                    except:
+                        wordfile = open('TypingGameWords.txt', 'r')
+                        words = wordfile.readlines()
+                        wordStr = random.choice(words).strip('\n')
+                        word = TypingGameWord(wordStr)
+                        wordfile.close()
+                        try:
+                            words.remove(wordStr)
+                        except ValueError:
+                            words.remove(wordStr+'\n')
+                    
     screen.fill((0,0,0))
     screen.blit(word.image, word.rect)
     pygame.display.flip()
-
 pygame.quit()
+quit()
