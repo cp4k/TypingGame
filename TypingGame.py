@@ -10,7 +10,7 @@ screen = pygame.display.set_mode((width,height))
 def get_words(text):
     for i in text:
         if len(i.split()) > 5:
-        words.extend(i.split())
+            words.extend(i.split())
 def clean_text(remove = [',','.','@','%','#','$','*','(',')','^']):
     I = 0
     for i in lines:
@@ -36,7 +36,7 @@ class TypingGameWord(pygame.sprite.Sprite):
 
 running = True
 
-word= TypingGameWord("Test!") #set our initial word
+word= TypingGameWord("Test #1!") #set our initial word
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
