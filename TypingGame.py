@@ -10,7 +10,7 @@ class TypingGameWord(pygame.sprite.Sprite):
     
     def __init__(self, word):
         pygame.sprite.Sprite.__init__(self) #initialize it as a pygame sprite
-        self.font = pygame.font.Font(None,100) #make the font we'll write the word in
+        self.font = pygame.font.Font("font.ttf",40) #make the font we'll write the word in
         self.originalWord = word
         self.word = word
         self.image = self.font.render(self.word, True, (255,255,255))
