@@ -50,7 +50,7 @@ class TypingGameWord(pygame.sprite.Sprite):
         if speedCoefficient < 5:
             speedCoefficient = 5
         old_top = self.rect.top
-        self.rect.top += speed / len(self.originalWord)
+        self.rect.top += speed / speedCoefficient
         if old_top < height/4 and self.rect.top >= height/4:
             extra_words.append(spawn_word())
         if self.rect.bottom >= height:
@@ -83,7 +83,12 @@ while running: #the main loop
                     speed += 3
                     score += 1
                     if len(extra_words) > 0:
-                        currentword = extra_words.pop(0)
+                        lowestwordindex = 0
+                        for i in range(len(extra_words)):
+                            if extra_words[i].rect.bottom > extra_words[lowestwordindex].rect.bottom:
+                                lowestwordindex = i
+                        currentword = extra_words.pop(lowestwordindex)
+                        
                     else:
                         currentword = spawn_word()
     currentword.update()
