@@ -2,7 +2,7 @@
 import pygame, random
 pygame.init()
 
-width,height = (640,480) #this is short for width=640 and height=480
+width,height = (800,600) #this is short for width=800 and height=600
 screen = pygame.display.set_mode((width,height)) #sets up the window
 
 class TypingGameWord(pygame.sprite.Sprite):
