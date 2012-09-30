@@ -9,6 +9,7 @@ class TypingGameWord(pygame.sprite.Sprite):
     "Represents a word that the user will have to type"
     
     def __init__(self, word):
+        global width
         pygame.sprite.Sprite.__init__(self) #initialize it as a pygame sprite
         self.font = pygame.font.Font("font.ttf",40) #make the font we'll write the word in
         self.originalWord = word
@@ -16,7 +17,7 @@ class TypingGameWord(pygame.sprite.Sprite):
         self.image = self.font.render(self.word, True, (255,255,255))
         self.rect = self.image.get_rect()
         self.rect.bottom = 0 #start the word just above the screen
-        self.rect.centerx = 320
+        self.rect.centerx = random.randint(self.rect.width/2,width-self.rect.width/2)
         
     def checkLetter(self, letter):
         "Checks a letter that the player typed.  Returns true if the word is empty, otherwise false."
@@ -35,10 +36,11 @@ class TypingGameWord(pygame.sprite.Sprite):
         self.rect.bottom = bottom
 
     def update(self):
+        global height
         "Called every frame to update the state of the word."
         global speed, running,score
         self.rect.top += speed / len(self.originalWord)
-        if self.rect.bottom >= 480:
+        if self.rect.bottom >= height:
             #TODO: Move losing the game out of this function
             print "YOU LOSE! Your score is:",score
             running = False
