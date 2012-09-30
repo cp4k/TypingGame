@@ -27,7 +27,11 @@ class TypingGameWord(pygame.sprite.Sprite):
 
 running = True
 
-word= TypingGameWord("Test #1!") #set our initial word
+wordfile = open('words.txt', 'r')
+words = wordfile.readlines()
+wordStr = random.choice(words).strip()
+word = TypingGameWord(wordStr)
+wordfile.close()
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -37,15 +41,8 @@ while running:
                 running = False
             else:
                 if word.checkLetter(event.unicode): #event.unicode is the letter the user typed
-                    try:
-                        wordStr = random.choice(words)
-                        word = TypingGameWord(wordStr)
-                    except:
-                        wordfile = open('words.txt', 'r')
-                        words = wordfile.readlines()
-                        wordStr = random.choice(words).strip()
-                        word = TypingGameWord(wordStr)
-                        wordfile.close()
+                    wordStr = random.choice(words)
+                    word = TypingGameWord(wordStr)
                     
     screen.fill((0,0,0))
     screen.blit(word.image, word.rect)
