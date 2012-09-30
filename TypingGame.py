@@ -55,7 +55,7 @@ while running:
                     except:
                         wordfile = open('words.txt', 'r')
                         words = wordfile.readlines()
-                        wordStr = random.choice(words).strip('\n')
+                        wordStr = random.choice(words).strip()
                         word = TypingGameWord(wordStr)
                         wordfile.close()
                         try:
