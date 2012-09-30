@@ -45,8 +45,8 @@ class TypingGameWord(pygame.sprite.Sprite):
         "Called every frame to update the state of the word."
         global speed, running,score, extra_words, currentword
         speedCoefficient = len(self.originalWord)
-        if speedCoefficient < len(currentword.word):
-            speedCoefficient = len(currentword.word)
+        if speedCoefficient < len(currentword.originalWord):
+            speedCoefficient = len(currentword.originalWord)
         if speedCoefficient < 5:
             speedCoefficient = 5
         old_top = self.rect.top
