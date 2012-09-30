@@ -5,6 +5,9 @@ def striplist(l):
 def openit(name):
     f = open()
     return striplist(f.readlines())
+shuffle_it = lambda lst:random.shuffle(lst)
+#shuffle_it(lst)
+#return shuffled lst
 width,height = (640,480)
 screen = pygame.display.set_mode((width,height))
 def get_words(text):
