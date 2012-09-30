@@ -4,13 +4,6 @@ pygame.init()
 width,height = (640,480) #this is short for width=640 and height=480
 screen = pygame.display.set_mode((width,height)) #sets up the window
 
-
-def get_words(text):
-    for i in text:
-        if len(i.split()) > 5:
-            words.extend(i.split())
-
-            
 class TypingGameWord(pygame.sprite.Sprite):
     "Represents a word that the user will have to type"
     
