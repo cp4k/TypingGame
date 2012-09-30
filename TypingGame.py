@@ -57,6 +57,8 @@ word = TypingGameWord(wordStr)
 wordfile.close()
 score = 0
 
+background = pygame.image.load("background.png").convert()
+
 clock = pygame.time.Clock()
 while running: #the main loop
     clock.tick(20)
@@ -74,6 +76,7 @@ while running: #the main loop
                     word = TypingGameWord(wordStr)
     word.update()
     screen.fill((0,0,0)) #clears the screen
+    screen.blit(background,(0,0))
     screen.blit(word.image, word.rect) #draw the word
     pygame.display.flip() #apply the changes
 pygame.quit() #fix the program breaking in IDLE
