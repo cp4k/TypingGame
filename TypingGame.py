@@ -5,6 +5,11 @@ pygame.init()
 width,height = (800,600) #this is short for width=800 and height=600
 screen = pygame.display.set_mode((width,height)) #sets up the window
 
+def spawn_word():
+    global words
+    wordStr = random.choice(words).strip()
+    return TypingGameWord(wordStr)
+
 class TypingGameWord(pygame.sprite.Sprite):
     "Represents a word that the user will have to type"
     
@@ -38,11 +43,16 @@ class TypingGameWord(pygame.sprite.Sprite):
     def update(self):
         global height
         "Called every frame to update the state of the word."
-        global speed, running,score
+        global speed, running,score, extra_words, currentword
         speedCoefficient = len(self.originalWord)
+        if speedCoefficient < len(currentword.word):
+            speedCoefficient = len(currentword.word)
         if speedCoefficient < 5:
             speedCoefficient = 5
+        old_top = self.rect.top
         self.rect.top += speed / len(self.originalWord)
+        if old_top < height/4 and self.rect.top >= height/4:
+            extra_words.append(spawn_word())
         if self.rect.bottom >= height:
             #TODO: Move losing the game out of this function
             print "YOU LOSE! Your score is:",score
@@ -52,8 +62,8 @@ running = True
 speed = 10
 wordfile = open('words.txt', 'r')
 words = wordfile.readlines()
-wordStr = random.choice(words).strip()
-word = TypingGameWord(wordStr)
+currentword = spawn_word()
+extra_words = []
 wordfile.close()
 score = 0
 
@@ -69,15 +79,21 @@ while running: #the main loop
             if event.key == pygame.K_ESCAPE:
                 running = False #stops the program
             else:
-                if word.checkLetter(event.unicode): #event.unicode is the letter the user typed
-                    wordStr = random.choice(words).strip()
+                if currentword.checkLetter(event.unicode): #event.unicode is the letter the user typed
                     speed += 3
                     score += 1
-                    word = TypingGameWord(wordStr)
-    word.update()
+                    if len(extra_words) > 0:
+                        currentword = extra_words.pop(0)
+                    else:
+                        currentword = spawn_word()
+    currentword.update()
+    for i in extra_words:
+        i.update()
     screen.fill((0,0,0)) #clears the screen
     screen.blit(background,(0,0))
-    pygame.draw.line(screen,(0,255,0),(width/2, height),(word.rect.left+7, word.rect.bottom),14)
-    screen.blit(word.image, word.rect) #draw the word
+    for i in extra_words:
+        screen.blit(i.image, i.rect)
+    pygame.draw.line(screen,(0,255,0),(width/2, height),(currentword.rect.left+7, currentword.rect.bottom),14)
+    screen.blit(currentword.image, currentword.rect) #draw the word
     pygame.display.flip() #apply the changes
 pygame.quit() #fix the program breaking in IDLE
