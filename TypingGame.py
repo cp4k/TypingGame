@@ -39,6 +39,9 @@ class TypingGameWord(pygame.sprite.Sprite):
         global height
         "Called every frame to update the state of the word."
         global speed, running,score
+        speedCoefficient = len(self.originalWord)
+        if speedCoefficient < 5:
+            speedCoefficient = 5
         self.rect.top += speed / len(self.originalWord)
         if self.rect.bottom >= height:
             #TODO: Move losing the game out of this function
