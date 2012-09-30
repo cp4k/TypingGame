@@ -67,6 +67,9 @@ extra_words = []
 wordfile.close()
 score = 0
 
+score_font = pygame.font.Font("score_font.ttf",60)
+
+
 background = pygame.image.load("background.png").convert()
 
 clock = pygame.time.Clock()
@@ -94,8 +97,12 @@ while running: #the main loop
     currentword.update()
     for i in extra_words:
         i.update()
+
+    score_surf = score_font.render("SCORE:"+str(score), True, (0,255,0))
+    
     screen.fill((0,0,0)) #clears the screen
     screen.blit(background,(0,0))
+    screen.blit(score_surf,(0,530))
     for i in extra_words:
         screen.blit(i.image, i.rect)
     pygame.draw.line(screen,(0,255,0),(width/2, height),(currentword.rect.left+7, currentword.rect.bottom),14)
