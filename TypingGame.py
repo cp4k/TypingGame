@@ -43,7 +43,7 @@ while running: #the main loop
                 running = False #stops the program
             else:
                 if word.checkLetter(event.unicode): #event.unicode is the letter the user typed
-                    wordStr = random.choice(words)
+                    wordStr = random.choice(words).strip()
                     word = TypingGameWord(wordStr)
                     
     screen.fill((0,0,0)) #clears the screen
