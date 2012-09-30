@@ -46,10 +46,6 @@ while running:
                         wordStr = random.choice(words).strip()
                         word = TypingGameWord(wordStr)
                         wordfile.close()
-                        try:
-                            words.remove(wordStr)
-                        except ValueError:
-                            words.remove(wordStr+'\n')
                     
     screen.fill((0,0,0))
     screen.blit(word.image, word.rect)
