@@ -36,7 +36,7 @@ class TypingGameWord(pygame.sprite.Sprite):
 
 running = True
 
-word= TypingGameWord("Test!") #set our initial word
+word= TypingGameWord("Test #1!") #set our initial word
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
