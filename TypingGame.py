@@ -77,6 +77,7 @@ while running: #the main loop
     word.update()
     screen.fill((0,0,0)) #clears the screen
     screen.blit(background,(0,0))
+    pygame.draw.line(screen,(0,255,0),(width/2, height),(word.rect.left+7, word.rect.bottom),14)
     screen.blit(word.image, word.rect) #draw the word
     pygame.display.flip() #apply the changes
 pygame.quit() #fix the program breaking in IDLE
