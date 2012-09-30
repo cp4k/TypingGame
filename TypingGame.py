@@ -7,11 +7,6 @@ def get_words(text):
     for i in text:
         if len(i.split()) > 5:
             words.extend(i.split())
-def clean_text(remove = [',','.','@','%','#','$','*','(',')','^']):
-    I = 0
-    for i in lines:
-        lines[I] = filter(lambda x: x not in remove,i)
-        I += 1
 class TypingGameWord(pygame.sprite.Sprite):
     def __init__(self, word):
         pygame.sprite.Sprite.__init__(self)
