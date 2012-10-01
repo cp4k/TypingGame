@@ -54,7 +54,8 @@ class TypingGameWord(pygame.sprite.Sprite):
         if old_top < height/4 and self.rect.top >= height/4:
             extra_words.append(spawn_word())
         if self.rect.bottom >= height:
-            #TODO: Move losing the game out of this function
+            lose()
+    def lose():
             print "YOU LOSE! Your score is:",score
             running = False
 
